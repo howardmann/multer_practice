@@ -14,6 +14,10 @@ app.get('/', function(req, res){
   res.render('index');
 });
 
+app.get('/camera', function(req, res){
+  res.render('camera');
+});
+
 app.get('/images', function(req, res, next){
   var files = [];
   fs.readdir('public/uploads/', function(err, filenames){
@@ -24,11 +28,10 @@ app.get('/images', function(req, res, next){
   });
 
   res.render('images', {data: files})
-  // res.writeHead(200, {'Content-Type':'image/png'});
-  // res.end(images);
 });
 
 app.post('/profile', upload.single('avatar'), function(req, res, next){
+  console.log(req.file);
   res.redirect('/images');
 });
 
